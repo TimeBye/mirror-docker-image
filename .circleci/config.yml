@@ -14,3 +14,8 @@ jobs:
           docker login -u $REGISTRY_HANDZHOU_USER -p $REGISTRY_HANDZHOU_PWD $REGISTRY_HANDZHOU
           docker login -u $REGISTRY_SHANGHAI_USER -p $REGISTRY_SHANGHAI_PWD $REGISTRY_SHANGHAI
           mirror
+workflows:
+  version: 2
+  build:
+    jobs:
+    - build

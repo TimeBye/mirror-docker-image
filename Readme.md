@@ -1,6 +1,6 @@
 # Mirror docker images
 
-[![pipeline status](https://gitlab.com/TimeBye/mirror-docker-image/badges/mirror/pipeline.svg)](https://gitlab.com/TimeBye/mirror-docker-image/commits/mirror)[![Build Status](https://travis-ci.com/TimeBye/mirror-docker-image.svg?branch=mirror)](https://travis-ci.com/TimeBye/mirror-docker-image)[![CircleCI](https://circleci.com/gh/TimeBye/mirror-docker-image.svg?style=svg)](https://circleci.com/gh/TimeBye/mirror-docker-image)
+[![Build Status](https://travis-ci.com/TimeBye/mirror-docker-image.svg?branch=mirror)](https://travis-ci.com/TimeBye/mirror-docker-image)[![CircleCI](https://circleci.com/gh/TimeBye/mirror-docker-image.svg?style=svg)](https://circleci.com/gh/TimeBye/mirror-docker-image)
 
 
 ### 怎样进行`docker image`同步
