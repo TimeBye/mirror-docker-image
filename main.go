@@ -6,6 +6,7 @@ import (
 	"github.com/ghodss/yaml"
 	"github.com/go-cmd/cmd"
 	"io/ioutil"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -32,7 +33,7 @@ type Batch struct {
 	MaxConcurrentDownloads int
 }
 
-func print(envCmd *cmd.Cmd) {
+func printInfo(envCmd *cmd.Cmd) {
 	ticker := time.NewTicker(1 * time.Second)
 	count := 0
 	for range ticker.C {
@@ -42,6 +43,14 @@ func print(envCmd *cmd.Cmd) {
 			fmt.Println(strings.Join(status.Stdout[count:n], "\n"))
 		}
 		count = n
+	}
+}
+
+func checkErr(envCmd *cmd.Cmd) {
+	status := envCmd.Status()
+	if status.Exit != 0 {
+		fmt.Println(strings.Join(status.Stderr, "\n"))
+		os.Exit(1)
 	}
 }
 
@@ -58,8 +67,9 @@ func generateImageName(oldImageName, registry string) string {
 func pull(image string, wg *sync.WaitGroup) {
 	green.Printf("docker pull %s\n", image)
 	envCmd := cmd.NewCmd("docker", "pull", image)
-	go print(envCmd)
+	go printInfo(envCmd)
 	<-envCmd.Start()
+	checkErr(envCmd)
 	if wg != nil {
 		wg.Done()
 	}
@@ -83,8 +93,9 @@ func tag(oldImageName, registry string, wg *sync.WaitGroup) {
 	newImageName := generateImageName(oldImageName, registry)
 	green.Printf("docker tag %s\t%s\n", oldImageName, newImageName)
 	envCmd := cmd.NewCmd("docker", "tag", oldImageName, newImageName)
-	go print(envCmd)
+	go printInfo(envCmd)
 	<-envCmd.Start()
+	checkErr(envCmd)
 	if wg != nil {
 		wg.Done()
 	}
@@ -109,8 +120,9 @@ func batchTag() []string {
 func push(image string, wg *sync.WaitGroup) {
 	green.Printf("docker push %s\n", image)
 	envCmd := cmd.NewCmd("docker", "push", image)
-	go print(envCmd)
+	go printInfo(envCmd)
 	<-envCmd.Start()
+	checkErr(envCmd)
 	if wg != nil {
 		wg.Done()
 	}
