@@ -1,5 +1,3 @@
-language: ruby
-
 services:
   - docker
 
@@ -8,4 +6,9 @@ before_install:
 - docker cp mirror:/usr/bin/mirror .
 
 script:
+- docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
+- docker login -u $REGISTRY_SAAS_USER -p $REGISTRY_SAAS_PWD $REGISTRY_SAAS
+- docker login -u $REGISTRY_CHOERODON_USER -p $REGISTRY_CHOERODON_PWD $REGISTRY_CHOERODON
+- docker login -u $REGISTRY_HANDZHOU_USER -p $REGISTRY_HANDZHOU_PWD $REGISTRY_HANDZHOU
+- docker login -u $REGISTRY_SHANGHAI_USER -p $REGISTRY_SHANGHAI_PWD $REGISTRY_SHANGHAI
 - ./mirror
