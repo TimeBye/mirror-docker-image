@@ -1,13 +1,17 @@
-image: docker:latest
+image: setzero/mirror-docker-image:latest
 
 services:
   - docker:dind
 
 before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD
+  - docker login -u $REGISTRY_SAAS_USER -p $REGISTRY_SAAS_PWD $REGISTRY_SAAS
+  - docker login -u $REGISTRY_CHOERODON_USER -p $REGISTRY_CHOERODON_PWD $REGISTRY_CHOERODON
+  - docker login -u $REGISTRY_HANDZHOU_USER -p $REGISTRY_HANDZHOU_PWD $REGISTRY_HANDZHOU
+  - docker login -u $REGISTRY_SHANGHAI_USER -p $REGISTRY_SHANGHAI_PWD $REGISTRY_SHANGHAI
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 build:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - mirror
