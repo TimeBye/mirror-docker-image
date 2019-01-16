@@ -1,10 +1,8 @@
 batch:
   maxConcurrentDownloads: 5
-  targetRegistry: registry.saas.hand-china.com/tools
+  targetRegistry: registry.cn-hangzhou.aliyuncs.com/choerodon-tools
   images:
-    - "redis:5.0.3"
-    - "mysql:5.7.24"
-    - "nginx:1.15.7"
-single:
-  - image: "tomcat:7.0.92-jre8"
-    targetRegistry: registry.saas.hand-china.com/tools
+    - quay.io/setzero/gitlab-ce:11.6.3-ce.0
+# single:
+#   - image: "tomcat:7.0.92-jre8"
+#     targetRegistry: registry.saas.hand-china.com/tools
