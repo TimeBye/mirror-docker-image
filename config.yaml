@@ -3,6 +3,11 @@ batch:
   targetRegistry: registry.cn-hangzhou.aliyuncs.com/choerodon-tools
   images:
     - quay.io/setzero/gitlab-ce:11.6.4-ce.0
+    - quay.io/setzero/gitlab-ce:11.6.3-ce.0
+    - quay.io/setzero/gitlab-ce:11.6.0-ce.0
+    - quay.io/setzero/gitlab-ce:11.5.5-ce.0
+    - quay.io/setzero/gitlab-ce:11.4.7-ce.0
+
 # single:
 #   - image: "tomcat:7.0.92-jre8"
 #     targetRegistry: registry.saas.hand-china.com/tools
